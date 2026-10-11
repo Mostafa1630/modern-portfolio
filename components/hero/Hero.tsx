@@ -3,10 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/i18n/LanguageProvider";
+import { translations } from "@/data/translations";
 
-const textVariants = {
+const textVariants = (dir: number) => ({
   initial: {
-    x: -500,
+    x: -500 * dir,
     opacity: 0,
   },
   animate: {
@@ -25,7 +27,7 @@ const textVariants = {
       repeat: Infinity,
     },
   },
-};
+});
 const sliderVariants = {
   initial: {
     x: 0,
@@ -41,43 +43,55 @@ const sliderVariants = {
 };
 
 const Hero = () => {
+  const { lang } = useLanguage();
+  const t = translations[lang];
+  const variants = textVariants(lang === "ar" ? -1 : 1);
+
   return (
     <div className="relative h-screen overflow-hidden bg-[linear-gradient(180deg,#0c0c1d,#111132)]">
       <div className="mx-auto h-full max-w-[1366px]">
         <motion.div
-          className="flex h-full w-1/2 flex-col justify-center gap-10 mobile:h-1/2 mobile:w-full mobile:items-center mobile:gap-5 mobile:text-center"
-          variants={textVariants}
+          className="flex h-full w-1/2 flex-col justify-center gap-10 mobile:h-full mobile:w-full mobile:items-center mobile:justify-start mobile:gap-4 mobile:pt-[110px] mobile:pb-[46vh] mobile:text-center"
+          variants={variants}
           initial="initial"
           animate="animate"
         >
           <motion.h2
-            variants={textVariants}
+            variants={variants}
             className="text-[30px] tracking-[10px] text-[rebeccapurple]"
           >
-            HARVEY TYLER
+            {t.hero.name}
           </motion.h2>
-          <motion.h1 variants={textVariants} className="text-[88px] mobile:text-4xl">
-            Web developer and UI designer
+          <motion.h1 variants={variants} className="text-[88px] mobile:text-4xl">
+            {t.hero.title}
           </motion.h1>
-          <motion.div variants={textVariants} className="flex flex-wrap gap-5">
-            <motion.div variants={textVariants}>
+          <motion.p
+            variants={variants}
+            className="max-w-[600px] text-xl font-light leading-relaxed text-gray-300 mobile:px-5 mobile:text-base"
+          >
+            {t.hero.desc}
+          </motion.p>
+          <motion.div variants={variants} className="flex flex-wrap gap-5">
+            <motion.div variants={variants}>
               <Link
-                href="/portfolio"
-                className="inline-block cursor-pointer rounded-[10px] border border-white bg-transparent p-5 font-light text-white"
+                href="#portfolio"
+                className="inline-block cursor-pointer rounded-[10px] border border-white bg-transparent p-5 font-light text-white mobile:p-3 mobile:text-sm"
               >
-                See the Latest Works
+                {t.hero.latestWorks}
               </Link>
             </motion.div>
-            <motion.div variants={textVariants}>
-              <Link
-                href="/contact"
-                className="inline-block cursor-pointer rounded-[10px] border border-white bg-transparent p-5 font-light text-white"
+            <motion.div variants={variants}>
+              <a
+                href="https://drive.google.com/file/d/1wcWpH1ewdd51rtf9qoRFuiFya2j3O9oA/view?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-block cursor-pointer rounded-[10px] border border-white bg-transparent p-5 font-light text-white transition-colors duration-300 hover:border-orange-500 hover:text-orange-500 mobile:p-3 mobile:text-sm"
               >
-                Contact Me
-              </Link>
+                {t.hero.viewCv}
+              </a>
             </motion.div>
           </motion.div>
-          <motion.div variants={textVariants} animate="scrollButton">
+          <motion.div variants={variants} animate="scrollButton">
             <Image src="/scroll.png" alt="" width={50} height={50} />
           </motion.div>
         </motion.div>
@@ -88,14 +102,14 @@ const Hero = () => {
         initial="initial"
         animate="animate"
       >
-        Writer Content Creator Influencer
+        {t.hero.slider}
       </motion.div>
-      <div className="absolute right-0 top-0 h-full w-1/2 mobile:top-auto mobile:bottom-0 mobile:h-1/2 mobile:w-full">
+      <div className="absolute end-0 top-[100px] bottom-0 w-1/2 mobile:top-auto mobile:bottom-0 mobile:h-[46vh] mobile:w-full">
         <Image
-          src="/hero.png"
-          alt=""
+          src="/Modern_profile.png"
+          alt="Mostafa Maher"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
         />
       </div>
