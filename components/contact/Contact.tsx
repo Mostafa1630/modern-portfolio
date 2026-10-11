@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import { useLanguage } from "@/components/i18n/LanguageProvider";
+import { translations } from "@/data/translations";
 
 const variants = {
   initial: {
@@ -24,6 +26,8 @@ const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   const isInView = useInView(ref, { margin: "-100px" });
 
@@ -52,7 +56,7 @@ const Contact = () => {
   return (
     <motion.div
       ref={ref}
-      className="mx-auto flex h-full max-w-[1366px] items-center gap-[50px] mobile:w-full mobile:flex-col mobile:p-[10px]"
+      className="mx-auto flex w-full max-w-[1366px] items-center gap-[50px] px-5 mobile:flex-col mobile:p-[10px]"
       variants={variants}
       initial="initial"
       whileInView="animate"
@@ -62,19 +66,23 @@ const Contact = () => {
         variants={variants}
       >
         <motion.h1 variants={variants} className="text-[100px] leading-[88px] mobile:text-4xl">
-          Let&rsquo;s work together
+          {t.contact.heading}
         </motion.h1>
         <motion.div className="item" variants={variants}>
-          <h2>Mail</h2>
-          <span className="font-light">hello@react.dev</span>
+          <h2>{t.contact.mail}</h2>
+          <span className="font-light">
+            <a href="mailto:mstfyabwsdyt@gmail.com">mstfyabwsdyt@gmail.com</a>
+          </span>
         </motion.div>
         <motion.div className="item" variants={variants}>
-          <h2>Address</h2>
-          <span className="font-light">Hello street, New York</span>
+          <h2>{t.contact.address}</h2>
+          <span className="font-light">El-Behira, Egypt</span>
         </motion.div>
         <motion.div className="item" variants={variants}>
-          <h2>Phone</h2>
-          <span className="font-light">+1 234 5678</span>
+          <h2>{t.contact.phone}</h2>
+          <span className="font-light">
+            <a href="tel:+201015949752">+20 101 594 9752</a>
+          </span>
         </motion.div>
       </motion.div>
       <div className="relative flex-1 mobile:w-full mobile:p-[50px]">
@@ -118,28 +126,28 @@ const Contact = () => {
           <input
             type="text"
             required
-            placeholder="Name"
+            placeholder={t.contact.namePlaceholder}
             name="name"
             className="rounded-[5px] border border-white bg-transparent p-5 text-white mobile:p-[10px]"
           />
           <input
             type="email"
             required
-            placeholder="Email"
+            placeholder={t.contact.emailPlaceholder}
             name="email"
             className="rounded-[5px] border border-white bg-transparent p-5 text-white mobile:p-[10px]"
           />
           <textarea
             rows={8}
-            placeholder="Message"
+            placeholder={t.contact.messagePlaceholder}
             name="message"
             className="rounded-[5px] border border-white bg-transparent p-5 text-white mobile:p-[10px]"
           />
           <button className="cursor-pointer border-none bg-orange-500 p-5 font-medium mobile:p-[10px]">
-            Submit
+            {t.contact.submit}
           </button>
-          {error && "Something went wrong. Please try again."}
-          {success && "Message sent successfully!"}
+          {error && t.contact.error}
+          {success && t.contact.success}
         </motion.form>
       </div>
     </motion.div>
