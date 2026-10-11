@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { navLinks } from "@/data/navLinks";
+import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/i18n/LanguageProvider";
+import { translations } from "@/data/translations";
 
 const variants = {
   open: {
@@ -29,23 +29,59 @@ const itemVariants = {
   },
 };
 
+const links = [
+  { id: "home", labelKey: "home" },
+  { id: "services", labelKey: "services" },
+  { id: "experience", labelKey: "experience" },
+  { id: "skills", labelKey: "skills" },
+  { id: "portfolio", labelKey: "portfolio" },
+  { id: "contact", labelKey: "contact" },
+] as const;
+
 const Links = ({ onNavigate }: { onNavigate: () => void }) => {
-  const pathname = usePathname();
+  const { lang } = useLanguage();
+  const t = translations[lang];
+  const [active, setActive] = useState<string>("home");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    links.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const handleClick = (id: string) => {
+    setActive(id);
+    onNavigate();
+    requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    });
+  };
 
   return (
     <motion.div
       className="absolute flex h-full w-full flex-col items-center justify-center gap-5"
       variants={variants}
     >
-      {navLinks.map((link) => (
-        <motion.div key={link.href} variants={itemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-          <Link
-            href={link.href}
-            onClick={onNavigate}
-            className={`text-[40px] mobile:text-xl ${pathname === link.href ? "font-bold text-orange-500" : ""}`}
+      {links.map((link) => (
+        <motion.div key={link.id} variants={itemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          <button
+            onClick={() => handleClick(link.id)}
+            className={`cursor-pointer bg-transparent text-[40px] mobile:text-xl ${
+              active === link.id ? "font-bold text-orange-500" : "text-black"
+            }`}
           >
-            {link.label}
-          </Link>
+            {t.nav[link.labelKey]}
+          </button>
         </motion.div>
       ))}
     </motion.div>

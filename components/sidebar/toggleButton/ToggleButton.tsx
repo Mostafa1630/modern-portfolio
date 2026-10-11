@@ -5,12 +5,15 @@ import type { Dispatch, SetStateAction } from "react";
 
 type ToggleButtonProps = {
   setOpen: Dispatch<SetStateAction<boolean>>;
+  isRtl: boolean;
 };
 
-const ToggleButton = ({ setOpen }: ToggleButtonProps) => {
+const ToggleButton = ({ setOpen, isRtl }: ToggleButtonProps) => {
   return (
     <button
-      className="fixed left-[25px] top-[25px] z-[999] h-[50px] w-[50px] cursor-pointer rounded-full border-none bg-transparent"
+      className={`fixed top-[25px] z-[999] flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border-none bg-transparent ${
+        isRtl ? "right-[25px]" : "left-[25px]"
+      }`}
       onClick={() => setOpen((prev) => !prev)}
     >
       <svg width="23" height="23" viewBox="0 0 23 23">
