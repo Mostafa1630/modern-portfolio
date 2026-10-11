@@ -1,0 +1,54 @@
+[
+  {
+    "id": "nadi-community",
+    "title": "Nadi Community",
+    "type": "web",
+    "img": "",
+    "imgWeb": "/nadi_web.jpg",
+    "imgMobile": "/nadi_app.jpg",
+    "desc": "E-learning platform where users register as students or content creators and join topic-based communities with courses and posts. Interactive learning via comments, discussions and full course playback. Scored 100/100 SEO and 99/100 Performance on PageSpeed Insights (Desktop).",
+    "descAr": "منصة تعليم إلكتروني يسجّل فيها المستخدمون كطلاب أو صنّاع محتوى، وينضمّون إلى مجتمعات بحسب المجال يتضمّن كورسات ومنشورات. تعلّم تفاعلي عبر التعليقات والنقاشات وتشغيل الكورسات كاملة. حقّقت 100/100 في تحسين محركات البحث و99/100 في الأداء على PageSpeed Insights (سطح المكتب).",
+    "tech": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    "demo": "https://nadi-community.com",
+    "github": "https://github.com/Mostafa1630/my-community2"
+  },
+  {
+    "id": "shopsphere-api",
+    "title": "ShopSphere API",
+    "type": "api",
+    "img": "/projects/shopsphere.jpg",
+    "imgWeb": "",
+    "imgMobile": "",
+    "desc": "Complete e-commerce backend built with Spring Boot: RESTful APIs for product browsing, cart and wishlist, a full order management system, and secure authentication with role-based authorization (Admin, User). Clean, modular architecture designed for scalability.",
+    "descAr": "واجهة خلفية لمتجر إلكتروني متكامل مبنية بإطار Spring Boot: واجهات برمجية RESTful لتصفّح المنتجات والسلة وقائمة المفضّلة، ونظام إدارة طلبات كامل، ومصادقة آمنة مع صلاحيات حسب الدور (مدير، مستخدم). معمارية نظيفة ومعيارية مصمّمة للتوسّع.",
+    "tech": ["Java", "Spring Boot", "MySQL", "JWT"],
+    "demo": "",
+    "github": "https://github.com/Mostafa1630/E-Commerce_API"
+  },
+  {
+    "id": "food-delivery-api",
+    "title": "Food Delivery API",
+    "type": "api",
+    "img": "/projects/food-delivery.jpg",
+    "imgWeb": "",
+    "imgMobile": "",
+    "desc": "Food delivery backend with Spring Boot featuring map-based location and delivery tracking, plus cart, wishlist and order management. Secured with authentication and role-based authorization (Admin, User, Delivery).",
+    "descAr": "واجهة خلفية لتطبيق توصيل طعام مبنية بإطار Spring Boot تتضمّن تتبّع الموقع والتوصيل عبر الخرائط، إضافة إلى السلة وقائمة المفضّلة وإدارة الطلبات. مؤمَّنة بالمصادقة والصلاحيات حسب الدور (مدير، مستخدم، مندوب توصيل).",
+    "tech": ["Java", "Spring Boot", "MySQL", "REST API"],
+    "demo": "",
+    "github": "https://github.com/Mostafa1630/Food-Delivery-API"
+  },
+  {
+    "id": "lampe",
+    "title": "Lampe Marketplace",
+    "type": "web",
+    "img": "",
+    "imgWeb": "/lampe_web.jpg",
+    "imgMobile": "/lampe_app.jpg",
+    "desc": "Multi-vendor marketplace frontend built with the Dr.Code team using Next.js, TypeScript and Tailwind CSS: category-based product browsing and a real-time merchant-customer chat system.",
+    "descAr": "واجهة أمامية لمنصة سوق إلكتروني متعدّد البائعين طوّرتها مع فريق Dr.Code باستخدام Next.js وTypeScript وTailwind CSS: تصفّح المنتجات حسب التصنيفات، ونظام دردشة فوري بين البائع والعميل.",
+    "tech": ["Next.js", "TypeScript", "Tailwind CSS", "WebSockets"],
+    "demo": "https://lampeonline.com",
+    "github": ""
+  }
+]
