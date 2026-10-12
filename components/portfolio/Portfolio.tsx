@@ -1,10 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { m } from "framer-motion";
 import projects from "@/data/projects.json";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { translations } from "@/data/translations";
+
+// Set after the first paint so a language-switch remount renders cards
+// already visible instead of waiting on the in-view observer again.
+let treeMounted = false;
 
 type PortfolioItem = (typeof projects)[number];
 
@@ -19,6 +24,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
   const fromLeft = index % 2 === 0;
   // Mirror the slide-in side in RTL, and keep the physical off-screen direction
   const startX = (fromLeft ? -300 : 300) * (lang === "ar" ? -1 : 1);
+  const firstLoad = !treeMounted;
 
   return (
     <section className="relative min-h-fit py-[30px] mobile:py-[10px]">
@@ -36,7 +42,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
           className={`mx-auto flex h-full w-full max-w-[1366px] items-center justify-center gap-[50px] px-[50px] mobile:flex-col mobile:px-[10px] ${
             !fromLeft ? "lg:flex-row-reverse" : ""
           }`}
-          initial={{ x: startX, opacity: 0 }}
+          initial={firstLoad ? { x: startX, opacity: 0 } : { x: 0, opacity: 1 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.9, ease: "easeOut" }}
@@ -79,7 +85,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
             ) : (
               <>
                 {item.type === "api" && (
-                  <span className="absolute end-10 top-3 z-10 rounded-lg bg-orange-500 px-10 py-1 text-lg font-bold text-white">
+                  <span className="absolute end-10 top-3 z-10 rounded-lg bg-orange-500 px-10 py-1 text-lg font-bold text-white mobile:end-2 mobile:top-2 mobile:px-4 mobile:py-0.5 mobile:text-sm">
                     {t.portfolio.api}
                   </span>
                 )}
@@ -173,6 +179,10 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
 const Portfolio = () => {
   const { lang } = useLanguage();
   const t = translations[lang];
+
+  useEffect(() => {
+    treeMounted = true;
+  }, []);
 
   return (
     <div className="relative">

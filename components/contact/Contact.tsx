@@ -24,6 +24,10 @@ const variants = {
   },
 };
 
+// Set after the first paint so a language-switch remount renders the
+// section and form already visible instead of replaying the reveal.
+let treeMounted = false;
+
 const Contact = () => {
   const ref = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -32,12 +36,17 @@ const Contact = () => {
   const [sending, setSending] = useState(false);
   const { lang } = useLanguage();
   const t = translations[lang];
+  const firstLoad = !treeMounted;
 
   useEffect(() => {
     if (!toast) return;
     const id = setTimeout(() => setToast(false), 4500);
     return () => clearTimeout(id);
   }, [toast]);
+
+  useEffect(() => {
+    treeMounted = true;
+  }, []);
 
   const isInView = useInView(ref, { margin: "-100px" });
 
@@ -78,7 +87,7 @@ const Contact = () => {
       ref={ref}
       className="mx-auto flex w-full max-w-[1366px] items-center gap-[50px] px-5 mobile:flex-col mobile:p-[10px]"
       variants={variants}
-      initial="initial"
+      initial={firstLoad ? "initial" : "animate"}
       whileInView="animate"
       viewport={{ once: true, margin: "-100px" }}
     >
@@ -143,7 +152,7 @@ const Contact = () => {
         <m.form
           ref={formRef}
           onSubmit={sendEmail}
-          initial={{ opacity: 0 }}
+          initial={{ opacity: firstLoad ? 0 : 1 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 4, duration: 1 }}
