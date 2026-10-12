@@ -127,3 +127,28 @@
 .toast-in {
   animation: toast-in 0.35s ease;
 }
+
+/* Browser scrollbar in the site's primary colors */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f97316 #0c0c1d;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0c0c1d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f97316;
+  border-radius: 8px;
+  border: 2px solid #0c0c1d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
