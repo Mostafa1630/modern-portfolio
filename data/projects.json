@@ -52,6 +52,28 @@
     "github": ""
   },
   {
+    "id": "pushtalk",
+    "title": "PushTalk",
+    "type": "web",
+    "img": "",
+    "imgWeb": "/pushtalk_web.jpg",
+    "imgMobile": "/pushtalk_app.jpg",
+    "desc": "A real-time chat application built with React, TypeScript, Tailwind CSS, WebSockets, FastAPI and PostgreSQL. It allows users to create accounts, join chat rooms, and send messages in real-time.",
+    "descAr": "تطبيق دردشة فوري مبني باستخدام React وTypeScript وTailwind CSS وWebSockets وFastAPI وPostgreSQL. يتيح للمستخدمين إنشاء حسابات، والانضمام إلى غرف الدردشة، وإرسال الرسائل في الوقت الفعلي.",
+    "tech": [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "WebSockets",
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker"
+    ],
+    "demo": "",
+    "github": "https://github.com/Mostafa1630/pushtalk"
+  },
+  {
     "id": "Sushi",
     "title": "Sushi Restaurant",
     "type": "web",
