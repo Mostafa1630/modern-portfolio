@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { translations } from "@/data/translations";
@@ -68,12 +68,12 @@ const Links = ({ onNavigate }: { onNavigate: () => void }) => {
   };
 
   return (
-    <motion.div
+    <m.div
       className="absolute flex h-full w-full flex-col items-center justify-center gap-5"
       variants={variants}
     >
       {links.map((link) => (
-        <motion.div key={link.id} variants={itemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <m.div key={link.id} variants={itemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
           <button
             onClick={() => handleClick(link.id)}
             className={`cursor-pointer bg-transparent text-[40px] mobile:text-xl ${
@@ -82,9 +82,9 @@ const Links = ({ onNavigate }: { onNavigate: () => void }) => {
           >
             {t.nav[link.labelKey]}
           </button>
-        </motion.div>
+        </m.div>
       ))}
-    </motion.div>
+    </m.div>
   );
 };
 

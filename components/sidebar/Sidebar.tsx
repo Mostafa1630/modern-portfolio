@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import Links from "./links/Links";
 import ToggleButton from "./toggleButton/ToggleButton";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
@@ -34,20 +34,20 @@ const Sidebar = () => {
   const isRtl = lang === "ar";
 
   return (
-    <motion.div
+    <m.div
       className="flex flex-col items-center justify-center bg-white text-black"
       animate={open ? "open" : "closed"}
     >
-      <motion.div
+      <m.div
         className={`fixed inset-y-0 ${
           isRtl ? "right-0" : "left-0"
         } z-[999] w-[400px] bg-white mobile:w-[200px]`}
         variants={variants(isRtl)}
       >
         <Links onNavigate={() => setOpen(false)} />
-      </motion.div>
+      </m.div>
       <ToggleButton setOpen={setOpen} isRtl={isRtl} />
-    </motion.div>
+    </m.div>
   );
 };
 

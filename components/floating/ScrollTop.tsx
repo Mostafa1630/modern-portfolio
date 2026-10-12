@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const ScrollTop = () => {
@@ -16,7 +16,7 @@ const ScrollTop = () => {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.button
+        <m.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ const ScrollTop = () => {
           >
             <path d="m18 15-6-6-6 6" />
           </svg>
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );

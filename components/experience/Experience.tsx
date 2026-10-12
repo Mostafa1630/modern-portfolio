@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { experiences } from "@/data/experience";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { translations } from "@/data/translations";
@@ -26,7 +26,7 @@ const Experience = () => {
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-[1366px] flex-col justify-center gap-[60px] px-5 py-[80px] mobile:py-[40px]">
-      <motion.div
+      <m.div
         className="text-center"
         variants={variants}
         initial="initial"
@@ -35,11 +35,11 @@ const Experience = () => {
       >
         <h1 className="text-[64px] font-thin mobile:text-4xl">{t.experience.heading}</h1>
         <p className="text-xl text-gray-400">{t.experience.sub}</p>
-      </motion.div>
+      </m.div>
 
       <div className="relative flex flex-col gap-[50px] before:absolute before:inset-y-0 before:left-1/2 before:w-[2px] before:-translate-x-1/2 before:bg-orange-500/30 mobile:before:hidden">
         {experiences.map((exp, i) => (
-          <motion.div
+          <m.div
             key={exp.id}
             className="relative"
             variants={variants}
@@ -72,7 +72,7 @@ const Experience = () => {
                 </ul>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </div>

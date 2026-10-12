@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { Dispatch, SetStateAction } from "react";
 
 type ToggleButtonProps = {
@@ -17,7 +17,7 @@ const ToggleButton = ({ setOpen, isRtl }: ToggleButtonProps) => {
       onClick={() => setOpen((prev) => !prev)}
     >
       <svg width="23" height="23" viewBox="0 0 23 23">
-        <motion.path
+        <m.path
           strokeWidth="3"
           stroke="black"
           strokeLinecap="round"
@@ -26,7 +26,7 @@ const ToggleButton = ({ setOpen, isRtl }: ToggleButtonProps) => {
             open: { d: "M 3 16.5 L 17 2.5" },
           }}
         />
-        <motion.path
+        <m.path
           strokeWidth="3"
           stroke="black"
           strokeLinecap="round"
@@ -36,7 +36,7 @@ const ToggleButton = ({ setOpen, isRtl }: ToggleButtonProps) => {
             open: { opacity: 0 },
           }}
         />
-        <motion.path
+        <m.path
           strokeWidth="3"
           stroke="black"
           strokeLinecap="round"

@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useState } from "react";
 
 const contacts = [
@@ -26,7 +26,7 @@ const ContactFab = () => {
       <AnimatePresence>
         {open &&
           contacts.map((c, i) => (
-            <motion.a
+            <m.a
               key={c.label}
               href={c.href}
               target="_blank"
@@ -41,10 +41,10 @@ const ContactFab = () => {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={c.icon} alt="" className="h-6 w-6" />
-            </motion.a>
+            </m.a>
           ))}
       </AnimatePresence>
-      <motion.button
+      <m.button
         onClick={() => setOpen((prev) => !prev)}
         aria-label="Open contact options"
         whileHover={{ scale: 1.1 }}
@@ -54,7 +54,7 @@ const ContactFab = () => {
         <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-3v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z" />
         </svg>
-      </motion.button>
+      </m.button>
     </div>
   );
 };
