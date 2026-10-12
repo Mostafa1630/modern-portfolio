@@ -80,6 +80,7 @@ const Contact = () => {
       variants={variants}
       initial="initial"
       whileInView="animate"
+      viewport={{ once: true, margin: "-100px" }}
     >
       <m.div
         className="flex flex-1 flex-col gap-10 mobile:mt-[70px] mobile:items-center mobile:gap-5 mobile:text-center"
@@ -113,6 +114,7 @@ const Contact = () => {
           className="absolute z-[-1] m-auto stroke-orange-500"
           initial={{ opacity: 1 }}
           whileInView={{ opacity: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 3, duration: 1 }}
         >
           <svg width="450px" height="450px" viewBox="0 0 32.666 32.666">
@@ -143,6 +145,7 @@ const Contact = () => {
           onSubmit={sendEmail}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
           transition={{ delay: 4, duration: 1 }}
           className="flex flex-col gap-5"
         >
