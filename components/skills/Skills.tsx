@@ -93,12 +93,21 @@ const Skills = () => {
             <span className="ps-[60px] text-sm font-bold uppercase tracking-[4px] text-orange-500 mobile:ps-5">
               {t.skills[bar.labelKey]}
             </span>
+            {/* Two identical groups (each padded by one gap) so the -50% loop point lands exactly on the second copy's start */}
             <div
-              className={`marquee-track ${bar.reverse ? "marquee-right" : "marquee-left"} w-max gap-6`}
+              className={`marquee-track ${bar.reverse ? "marquee-right" : "marquee-left"} w-max`}
               style={{ animationDuration: bar.speed }}
             >
-              {[...bar.skills, ...bar.skills].map((skill, i) => (
-                <Chip key={`${skill.name}-${i}`} skill={skill} />
+              {[0, 1].map((copy) => (
+                <div
+                  key={copy}
+                  aria-hidden={copy === 1}
+                  className="flex shrink-0 items-center gap-6 pe-6"
+                >
+                  {bar.skills.map((skill) => (
+                    <Chip key={skill.name} skill={skill} />
+                  ))}
+                </div>
               ))}
             </div>
           </div>
