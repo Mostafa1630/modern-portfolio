@@ -71,7 +71,7 @@ const Services = () => {
             onClick={() =>
               document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })
             }
-            className="h-[100px] w-[300px] cursor-pointer rounded-[50px] border-none bg-orange-500 text-2xl text-white transition-all duration-300 hover:scale-105 hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] mobile:h-[50px] mobile:w-[150px] mobile:text-base"
+            className="h-[100px] w-[300px] cursor-pointer rounded-[50px] border-none bg-orange-500 text-2xl text-white transition-all duration-300 hover:scale-105 hover:bg-orange-600 hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] mobile:mb-6 mobile:h-[50px] mobile:w-[150px] mobile:text-base"
           >
             {t.services.whatWeDo}
           </button>
