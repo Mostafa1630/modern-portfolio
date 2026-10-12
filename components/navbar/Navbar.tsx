@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 
 const socials = [
@@ -28,14 +28,14 @@ const Navbar = () => {
   return (
     <div className="fixed inset-x-0 top-0 z-40 h-[100px] bg-[#0c0c1d]/70 backdrop-blur-md">
       <div className="mx-auto flex h-full max-w-[1366px] items-center justify-between mobile:justify-end mobile:p-5">
-        <motion.span
+        <m.span
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="ms-[100px] font-bold mobile:hidden"
         >
           <Link href="#home">Mostafa Maher</Link>
-        </motion.span>
+        </m.span>
         <div className="flex items-center gap-5">
           <button
             onClick={toggle}
@@ -61,20 +61,40 @@ const Navbar = () => {
               <path d="M14 18h6" />
             </svg>
           </button>
-          {socials.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={social.label}
-              className="transition-colors hover:text-orange-500"
+          <div className="icon-ring">
+            <svg
+              className="icon-ring-line"
+              viewBox="0 0 112 44"
+              aria-hidden="true"
             >
-              <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor">
-                <path d={social.path} />
-              </svg>
-            </a>
-          ))}
+              <rect
+                x="1"
+                y="1"
+                width="110"
+                height="42"
+                rx="21"
+                fill="none"
+                stroke="#f97316"
+                strokeWidth="2"
+                pathLength="100"
+                strokeDasharray="12.5 87.5"
+              />
+            </svg>
+            {socials.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={social.label}
+                className="text-white transition-colors hover:text-orange-500"
+              >
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="currentColor">
+                  <path d={social.path} />
+                </svg>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>

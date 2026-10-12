@@ -52,6 +52,10 @@ export const translations = {
       error: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
       success: "تم إرسال الرسالة بنجاح!",
     },
+    footer: {
+      role: "مطوّر ويب متكامل ",
+      rights: "جميع الحقوق محفوظة",
+    },
   },
   en: {
     nav: {
@@ -103,6 +107,10 @@ export const translations = {
       submit: "Submit",
       error: "Something went wrong. Please try again.",
       success: "Message sent successfully!",
+    },
+    footer: {
+      role: "Full-Stack Developer",
+      rights: "All rights reserved",
     },
   },
 } as const;
