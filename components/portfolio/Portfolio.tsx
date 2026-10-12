@@ -17,6 +17,8 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
   const fallbackImg = item.img || item.imgWeb || item.imgMobile;
 
   const fromLeft = index % 2 === 0;
+  // Mirror the slide-in side in RTL, and keep the physical off-screen direction
+  const startX = (fromLeft ? -300 : 300) * (lang === "ar" ? -1 : 1);
 
   return (
     <section className="relative min-h-fit py-[30px] mobile:py-[10px]">
@@ -34,9 +36,9 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
           className={`mx-auto flex h-full w-full max-w-[1366px] items-center justify-center gap-[50px] px-[50px] mobile:flex-col mobile:px-[10px] ${
             !fromLeft ? "lg:flex-row-reverse" : ""
           }`}
-          initial={{ x: fromLeft ? -300 : 300, opacity: 0 }}
+          initial={{ x: startX, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
-          viewport={{ once: false, margin: "-120px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.9, ease: "easeOut" }}
         >
           {/* Visual */}
