@@ -1,10 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import emailjs from "@emailjs/browser";
+import { useEffect, useRef, useState } from "react";
+import { m, useInView } from "framer-motion";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { translations } from "@/data/translations";
+
+// Get your own key at https://app.web3forms.com/ and put it in .env.local
+const WEB3FORMS_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "YOUR_WEB3FORMS_ACCESS_KEY";
 
 const variants = {
   initial: {
@@ -25,75 +28,95 @@ const Contact = () => {
   const ref = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [toast, setToast] = useState(false);
+  const [sending, setSending] = useState(false);
   const { lang } = useLanguage();
   const t = translations[lang];
 
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(() => setToast(false), 4500);
+    return () => clearTimeout(id);
+  }, [toast]);
+
   const isInView = useInView(ref, { margin: "-100px" });
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!formRef.current) return;
+    if (!formRef.current || sending) return;
 
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formRef.current,
-        { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY! }
-      )
-      .then(
-        () => {
-          setSuccess(true);
-        },
-        () => {
-          setError(true);
-        }
-      );
+    setSending(true);
+    setError(false);
+
+    try {
+      const data = new FormData(formRef.current);
+      data.append("access_key", WEB3FORMS_ACCESS_KEY);
+      data.append("subject", "New message from Mostafa Maher portfolio");
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        setToast(true);
+        formRef.current.reset();
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className="mx-auto flex w-full max-w-[1366px] items-center gap-[50px] px-5 mobile:flex-col mobile:p-[10px]"
       variants={variants}
       initial="initial"
       whileInView="animate"
     >
-      <motion.div
+      <m.div
         className="flex flex-1 flex-col gap-10 mobile:mt-[70px] mobile:items-center mobile:gap-5 mobile:text-center"
         variants={variants}
       >
-        <motion.h1 variants={variants} className="text-[100px] leading-[88px] mobile:text-4xl">
+        <m.h1
+          variants={variants}
+          className="text-[100px] leading-[88px] mobile:text-4xl"
+        >
           {t.contact.heading}
-        </motion.h1>
-        <motion.div className="item" variants={variants}>
+        </m.h1>
+        <m.div className="item" variants={variants}>
           <h2>{t.contact.mail}</h2>
           <span className="font-light">
             <a href="mailto:mstfyabwsdyt@gmail.com">mstfyabwsdyt@gmail.com</a>
           </span>
-        </motion.div>
-        <motion.div className="item" variants={variants}>
+        </m.div>
+        <m.div className="item" variants={variants}>
           <h2>{t.contact.address}</h2>
           <span className="font-light">El-Behira, Egypt</span>
-        </motion.div>
-        <motion.div className="item" variants={variants}>
+        </m.div>
+        <m.div className="item" variants={variants}>
           <h2>{t.contact.phone}</h2>
           <span className="font-light">
             <a href="tel:+201015949752">+20 101 594 9752</a>
           </span>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
       <div className="relative flex-1 mobile:w-full mobile:p-[50px]">
-        <motion.div
+        <m.div
           className="absolute z-[-1] m-auto stroke-orange-500"
           initial={{ opacity: 1 }}
           whileInView={{ opacity: 0 }}
           transition={{ delay: 3, duration: 1 }}
         >
           <svg width="450px" height="450px" viewBox="0 0 32.666 32.666">
-            <motion.path
+            <m.path
               strokeWidth={0.2}
               fill="none"
               initial={{ pathLength: 0 }}
@@ -114,8 +137,8 @@ const Contact = () => {
             C32.666,7.326,25.339,0,16.333,0z"
             />
           </svg>
-        </motion.div>
-        <motion.form
+        </m.div>
+        <m.form
           ref={formRef}
           onSubmit={sendEmail}
           initial={{ opacity: 0 }}
@@ -143,14 +166,37 @@ const Contact = () => {
             name="message"
             className="rounded-[5px] border border-white bg-transparent p-5 text-white mobile:p-[10px]"
           />
-          <button className="cursor-pointer border-none bg-orange-500 p-5 font-medium mobile:p-[10px]">
-            {t.contact.submit}
+          <button
+            disabled={sending}
+            className="cursor-pointer border-none bg-orange-500 p-5 font-medium disabled:cursor-wait disabled:opacity-60 mobile:p-[10px]"
+          >
+            {sending ? "..." : t.contact.submit}
           </button>
           {error && t.contact.error}
-          {success && t.contact.success}
-        </motion.form>
+        </m.form>
       </div>
-    </motion.div>
+      {toast && (
+        <div
+          role="status"
+          className="toast-in fixed bottom-6 end-6 z-50 flex items-center gap-3 rounded-xl bg-green-600 px-5 py-3.5 font-medium text-white shadow-[0_10px_30px_rgba(34,197,94,0.35)]"
+        >
+          <svg
+            width={18}
+            height={18}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          {t.contact.success}
+        </div>
+      )}
+    </m.div>
   );
 };
 
