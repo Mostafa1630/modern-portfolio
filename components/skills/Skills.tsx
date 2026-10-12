@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { translations } from "@/data/translations";
 
@@ -63,8 +63,9 @@ const bars: { labelKey: "frontend" | "backend" | "tools"; reverse: boolean; spee
 
 const Chip = ({ skill }: { skill: Skill }) => (
   <div className="flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/5 px-6 py-3">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src={`/skills/${skill.logo}.svg`} alt="" className="h-7 w-7" />
+    <svg className="h-7 w-7" aria-hidden="true">
+      <use href={`/skills/sprite.svg#${skill.logo}`} />
+    </svg>
     <span className="whitespace-nowrap text-lg font-light">{skill.name}</span>
   </div>
 );
@@ -75,7 +76,7 @@ const Skills = () => {
 
   return (
     <div className="flex w-full flex-col gap-[80px] overflow-hidden py-[80px] mobile:py-[40px]">
-      <motion.div
+      <m.div
         className="px-5 text-center"
         initial={{ y: 60, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -84,7 +85,7 @@ const Skills = () => {
       >
         <h1 className="text-[64px] font-thin mobile:text-4xl">{t.skills.heading}</h1>
         <p className="text-xl text-gray-400">{t.skills.sub}</p>
-      </motion.div>
+      </m.div>
 
       <div className="flex flex-col gap-[50px]">
         {bars.map((bar) => (
