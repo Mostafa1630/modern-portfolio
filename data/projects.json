@@ -16,12 +16,12 @@
     "id": "shopsphere-api",
     "title": "ShopSphere API",
     "type": "api",
-    "img": "/projects/shopsphere.jpg",
+    "img": "/projects/shopsphere.png",
     "imgWeb": "",
     "imgMobile": "",
     "desc": "Complete e-commerce backend built with Spring Boot: RESTful APIs for product browsing, cart and wishlist, a full order management system, and secure authentication with role-based authorization (Admin, User). Clean, modular architecture designed for scalability.",
     "descAr": "واجهة خلفية لمتجر إلكتروني متكامل مبنية بإطار Spring Boot: واجهات برمجية RESTful لتصفّح المنتجات والسلة وقائمة المفضّلة، ونظام إدارة طلبات كامل، ومصادقة آمنة مع صلاحيات حسب الدور (مدير، مستخدم). معمارية نظيفة ومعيارية مصمّمة للتوسّع.",
-    "tech": ["Java", "Spring Boot", "MySQL", "JWT"],
+    "tech": ["Java", "Spring Boot", "MySQL", "JWT", "REST API"],
     "demo": "",
     "github": "https://github.com/Mostafa1630/E-Commerce_API"
   },
@@ -48,7 +48,20 @@
     "desc": "Multi-vendor marketplace frontend built with the Dr.Code team using Next.js, TypeScript and Tailwind CSS: category-based product browsing and a real-time merchant-customer chat system.",
     "descAr": "واجهة أمامية لمنصة سوق إلكتروني متعدّد البائعين طوّرتها مع فريق Dr.Code باستخدام Next.js وTypeScript وTailwind CSS: تصفّح المنتجات حسب التصنيفات، ونظام دردشة فوري بين البائع والعميل.",
     "tech": ["Next.js", "TypeScript", "Tailwind CSS", "WebSockets"],
-    "demo": "https://lampeonline.com",
+    "demo": "https://lampe-dashboard.doctor-code.net/",
     "github": ""
+  },
+  {
+    "id": "Sushi",
+    "title": "Sushi Restaurant",
+    "type": "web",
+    "img": "",
+    "imgWeb": "/sushi_web.jpg",
+    "imgMobile": "/sushi_app.jpg",
+    "desc": "A Sushi Restaurant website built with HTML, CSS, JavaScript and Bootstrap. It features a responsive design, interactive menu, and smooth scrolling.",
+    "descAr": "موقع لمطعم سوشي مبني باستخدام HTML و CSS و JavaScript و Bootstrap. يتميز بتصميم متجاوب، قائمة تفاعلية، وتمرير سلس.",
+    "tech": ["Html", "CSS", "JavaScript", "Bootstrap"],
+    "demo": "https://mostafa1630.github.io/Sushi-Restaurant-Website/",
+    "github": "https://github.com/Mostafa1630/Sushi-Restaurant-Website"
   }
 ]

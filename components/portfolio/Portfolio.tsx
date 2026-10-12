@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import projects from "@/data/projects.json";
 import { useLanguage } from "@/components/i18n/LanguageProvider";
 import { translations } from "@/data/translations";
@@ -19,10 +19,10 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
   const fromLeft = index % 2 === 0;
 
   return (
-    <section className="relative">
+    <section className="relative min-h-fit py-[30px] mobile:py-[10px]">
       {/* Ghost number */}
       <span
-        className={`pointer-events-none absolute top-[60px] select-none text-[160px] font-black leading-none text-white/5 mobile:hidden ${
+        className={`pointer-events-none absolute top-[30px] select-none text-[160px] font-black leading-none text-white/5 mobile:hidden ${
           fromLeft ? "left-[30px]" : "right-[30px]"
         }`}
       >
@@ -30,9 +30,9 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
       </span>
 
       <div className="flex h-full w-full items-center justify-center overflow-hidden">
-        <motion.div
+        <m.div
           className={`mx-auto flex h-full w-full max-w-[1366px] items-center justify-center gap-[50px] px-[50px] mobile:flex-col mobile:px-[10px] ${
-            !fromLeft ? "min-[1025px]:flex-row-reverse mobile:flex-col-reverse" : ""
+            !fromLeft ? "lg:flex-row-reverse" : ""
           }`}
           initial={{ x: fromLeft ? -300 : 300, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
@@ -52,6 +52,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
                         src={item.imgWeb}
                         alt={`${item.title} — web`}
                         fill
+                        sizes="(max-width: 738px) 55vw, 430px"
                         className="object-cover object-top"
                       />
                     </div>
@@ -60,6 +61,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
                         src={item.imgMobile}
                         alt={`${item.title} — mobile`}
                         fill
+                        sizes="(max-width: 738px) 25vw, 180px"
                         className="object-cover object-top"
                       />
                     </div>
@@ -75,7 +77,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
             ) : (
               <>
                 {item.type === "api" && (
-                  <span className="absolute start-3 top-3 z-10 rounded-lg bg-orange-500 px-3 py-1 text-sm font-bold text-white">
+                  <span className="absolute end-10 top-3 z-10 rounded-lg bg-orange-500 px-10 py-1 text-lg font-bold text-white">
                     {t.portfolio.api}
                   </span>
                 )}
@@ -85,6 +87,7 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
                       src={fallbackImg}
                       alt={item.title}
                       fill
+                      sizes="(max-width: 738px) 100vw, 600px"
                       className="object-cover mobile:object-contain"
                     />
                   </div>
@@ -94,12 +97,14 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
           </div>
 
           {/* Text */}
-          <motion.div className="flex min-w-0 flex-1 flex-col gap-[25px] mobile:items-center mobile:p-[10px] mobile:text-center">
+          <m.div className="flex min-w-0 flex-1 flex-col gap-[25px] mobile:items-center mobile:p-[10px] mobile:text-center">
             <h2 className="text-7xl font-thin mobile:text-4xl">
               {item.title}
               <span className="mt-3 block h-[3px] w-[80px] rounded-full bg-orange-500 mobile:mx-auto" />
             </h2>
-            <p className="text-xl leading-relaxed text-gray-400 mobile:text-base">{desc}</p>
+            <p className="text-xl leading-relaxed text-gray-400 mobile:text-base">
+              {desc}
+            </p>
 
             {/* Tech chips */}
             <div className="flex flex-wrap gap-2">
@@ -144,15 +149,20 @@ const Single = ({ item, index }: { item: PortfolioItem; index: number }) => {
                   rel="noreferrer"
                   className="flex w-[200px] items-center justify-center gap-2 rounded-[10px] border border-white/60 bg-transparent p-[10px] text-center text-white transition-all duration-300 hover:scale-105 hover:border-orange-500 hover:text-orange-500 mobile:w-[150px]"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
                     <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
                   </svg>
                   GitHub
                 </a>
               )}
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );
@@ -164,7 +174,7 @@ const Portfolio = () => {
 
   return (
     <div className="relative">
-      <div className="sticky left-0 top-[100px] z-30 flex justify-center pt-[50px] mobile:pt-[calc(100vh-200px)]">
+      <div className="sticky left-0 top-[100px] z-30 flex justify-center pt-[50px] mobile:pt-[16px]">
         <h1 className="rounded-full border border-orange-500/30 bg-[#0c0c1d]/80 px-8 py-3 text-2xl font-light tracking-[3px] text-orange-500 backdrop-blur-md mobile:text-lg">
           {t.portfolio.featured}
         </h1>
@@ -177,4 +187,3 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
-
